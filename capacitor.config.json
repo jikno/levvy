@@ -1,0 +1,11 @@
+{
+  "appId": "com.vehmloewff.finance",
+  "appName": "Finance",
+  "bundledWebRuntime": false,
+  "webDir": "public",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  }
+}
