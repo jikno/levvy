@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Modal overrides so that it can be toggled without a checkbox */
+.modal {
+	pointer-events: all;
+	visibility: visible;
+	opacity: 1;
+}
