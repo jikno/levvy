@@ -15,7 +15,7 @@
 	}
 </script>
 
-<form class="form-control max-w-sm m-auto h-full flex justify-center" on:submit|preventDefault={submit}>
+<form class="form-control max-w-sm m-auto h-full flex justify-center p-4" on:submit|preventDefault={submit}>
 	<div class="label text-lg font-semibold">Enter your email...</div>
 	<input type="email" placeholder="johndoe@exampe.com" class="input input-bordered w-full" bind:value={email} />
 

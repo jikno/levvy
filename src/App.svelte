@@ -1,15 +1,16 @@
 <script lang="ts">
+	import { fly } from 'svelte/transition'
+	import { formatMoney, getUserTotalBalance } from './utils'
 	import { db, populateDb } from './db'
 
 	import NewTransactionModal from './modals/NewTransaction.svelte'
 	import SettingsModal from './modals/Settings.svelte'
 	import Envelope from './pages/Envelope.svelte'
-
 	import Envelopes from './pages/Envelopes.svelte'
 	import Login from './pages/Login.svelte'
-	import { formatMoney, getUserTotalBalance } from './utils'
 
 	let loading = false
+	let windowWidth: number
 	let email: string | null = localStorage.getItem('stashed-email') || null
 	let selectedEnvelope: string | null = null
 
@@ -30,18 +31,23 @@
 	}
 </script>
 
+<svelte:window bind:innerWidth={windowWidth} />
+
 {#if loading}
 	<div class="h-full flex items-center justify-center">Loading...</div>
 {:else if !email}
 	<Login {onVerify} />
 {:else}
-	<div class="grid grid-cols-2 grid-rows-1" style="height: calc(100% - 5rem - 2px)">
-		<div class="border-r-2 border-base-200 overflow-auto">
+	<div class="sm:grid sm:grid-cols-2 sm:grid-rows-1 relative" style="height: calc(100% - 5rem - 2px)">
+		<div class="sm:border-r-2 sm:border-base-200 overflow-auto">
 			<Envelopes bind:selectedEnvelope />
 		</div>
 		{#if selectedEnvelope}
-			<div class="overflow-auto">
-				<Envelope id={selectedEnvelope} />
+			<div
+				class="overflow-auto absolute sm:relative inset-0 bg-base-100 z-10"
+				in:fly={{ y: 100, duration: windowWidth < 640 ? 300 : 0 }}
+			>
+				<Envelope id={selectedEnvelope} onBack={() => (selectedEnvelope = null)} />
 			</div>
 		{:else}
 			<div class="flex justify-center items-center opacity-50 italic">Select an envelope to view it in detail</div>
@@ -60,7 +66,7 @@
 					clip-rule="evenodd"
 				/>
 			</svg>
-			Record Transaction
+			<div class="hidden sm:block">Record Transaction</div>
 		</div>
 
 		<div class="flex-auto" />
