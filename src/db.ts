@@ -28,7 +28,7 @@ export const db = writable<DB>({
 	transactions: {},
 })
 
-const dbUrl = `http://localhost:2500/finance`
+const dbUrl = `https://vehmloewff-keyed-db.deno.dev/finance`
 
 export async function populateDb(email: string) {
 	db.set(
