@@ -35,7 +35,7 @@
 
 <svelte:window bind:innerWidth={windowWidth} />
 
-<div class="fixed inset-0 bg-solid-100">
+<div class="fixed inset-0 bg-solid-100 over">
 	{#if loading}
 		<div class="h-full flex items-center justify-center">Loading...</div>
 	{:else if !userString}
@@ -91,3 +91,10 @@
 	<SettingsModal bind:isOpen={settingsModalIsOpen} />
 	<NewTransactionModal bind:isOpen={newTransactionModalIsOpen} />
 </div>
+
+<style>
+	.over {
+		padding-top: env(safe-area-inset-top);
+		padding-bottom: env(safe-area-inset-bottom);
+	}
+</style>

@@ -24,12 +24,14 @@
 			style="box-shadow: 0 0 25px 5px rgba(0, 0, 0, 0.25);"
 			in:fly={{ delay: 200, duration: 100, y: 50 }}
 		>
-			{#if title}
-				<h3 class="font-bold text-2xl">{title}</h3>
-				<div class="h-4" />
-			{/if}
+			<div class="saftey">
+				{#if title}
+					<h3 class="font-bold text-2xl">{title}</h3>
+					<div class="h-4" />
+				{/if}
 
-			<slot {isOpen} />
+				<slot {isOpen} />
+			</div>
 		</div>
 	{:else}
 		<div class="fixed inset-0 z-40 pointer-events-none flex items-center justify-center">
@@ -47,3 +49,9 @@
 		</div>
 	{/if}
 {/if}
+
+<style>
+	.saftey {
+		padding-bottom: env(safe-area-inset-bottom);
+	}
+</style>
