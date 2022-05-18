@@ -18,6 +18,7 @@ export interface Envelope {
 export interface Transaction {
 	id: string
 	type: 'income' | 'expense'
+	amount: number
 	envelopes: Record<string, number> // envelope id -> transaction amount as applies to envelope
 	label: string | null
 	date: number

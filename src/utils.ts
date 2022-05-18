@@ -105,11 +105,13 @@ export function autofocus(node: HTMLElement) {
 	return {}
 }
 
-export function getUnallocatedAmount(amount: number, envelopes: Record<string, number>) {
+export function getAllocatedAmount(envelopes: Record<string, number>) {
+	let amount = 0
+
 	for (const id in envelopes) {
 		const envelopeAmount = envelopes[id]
 
-		amount -= envelopeAmount
+		amount += envelopeAmount
 	}
 
 	return amount

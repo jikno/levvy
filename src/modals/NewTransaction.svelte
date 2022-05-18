@@ -6,7 +6,7 @@
 		calculateEnvelopeBalance,
 		envelopesLeft,
 		formatMoney,
-		getUnallocatedAmount,
+		getAllocatedAmount,
 		onEnter,
 		pickExpenseEnvelope,
 		randomUUID,
@@ -26,7 +26,7 @@
 	let envelopes: Record<string, number> = {}
 	let label = ''
 
-	$: unallocated = getUnallocatedAmount(amount, envelopes)
+	$: unallocated = amount - getAllocatedAmount(envelopes)
 	$: valid = /^\d+(\.\d+)?$/.test(rawAmount) && allEnvelopesExist(envelopes) && !(unallocated < 0)
 	$: amount = parseFloat(rawAmount)
 
@@ -51,6 +51,7 @@
 			id,
 			type,
 			envelopes,
+			amount,
 			label: label || null,
 			date: Date.now(),
 		}

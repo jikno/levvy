@@ -2,11 +2,14 @@
 	import { db } from '../db'
 	import { compileEnvelopeTransactions, formatDate, formatMoney } from '../utils'
 	import EnvelopeDetailsModal from '../modals/EnvelopeDetails.svelte'
+	import TransactionModal from '../modals/Transaction.svelte'
 
 	export let id: string
 	export let onBack: () => unknown
 
 	let showEditModal = false
+	let showTransactionModal = false
+	let lastSelectedTransactionId: string | null = null
 
 	$: envelope = $db.envelopes[id]
 </script>
@@ -63,7 +66,13 @@
 
 <div class="p-2">
 	{#each compileEnvelopeTransactions(id, $db) as transaction}
-		<div class="rounded-lg bg-base-200 select-none cursor-pointer p-4 my-2">
+		<div
+			class="rounded-lg bg-base-200 select-none cursor-pointer p-4 my-2"
+			on:click={() => {
+				showTransactionModal = true
+				lastSelectedTransactionId = transaction.transactionId
+			}}
+		>
 			<div class="flex">
 				<div class="flex-auto">
 					{transaction.label}
@@ -97,3 +106,6 @@
 
 <!-- Modals -->
 <EnvelopeDetailsModal bind:isOpen={showEditModal} {id} />
+{#if lastSelectedTransactionId}
+	<TransactionModal bind:isOpen={showTransactionModal} id={lastSelectedTransactionId} />
+{/if}
