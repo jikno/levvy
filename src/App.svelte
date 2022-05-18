@@ -65,7 +65,7 @@
 
 		<div class="flex-auto" />
 
-		<div class="text-small">{formatMoney(getUserTotalBalance($db))}</div>
+		<div class="badge badge-lg badge-primary">{formatMoney(getUserTotalBalance($db))}</div>
 
 		<div class="p-4 select-none cursor-pointer hover:opacity-80 transition-opacity" on:click={() => (settingsModalIsOpen = true)}>
 			<svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 20 20" fill="currentColor">
