@@ -1,6 +1,7 @@
 {
-    "name": "",
-    "short_name": "",
+    "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+    "name": "Finance",
+    "short_name": "Finance",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -15,5 +16,6 @@
     ],
     "theme_color": "#4c75cf",
     "background_color": "#4c75cf",
-    "display": "standalone"
+    "display": "standalone",
+    "orientation": "portrait"
 }

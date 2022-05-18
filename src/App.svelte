@@ -33,57 +33,59 @@
 
 <svelte:window bind:innerWidth={windowWidth} />
 
-{#if loading}
-	<div class="h-full flex items-center justify-center">Loading...</div>
-{:else if !email}
-	<Login {onVerify} />
-{:else}
-	<div class="sm:grid sm:grid-cols-2 sm:grid-rows-1 relative" style="height: calc(100% - 5rem - 2px)">
-		<div class="sm:border-r-2 sm:border-base-200 overflow-auto h-full">
-			<Envelopes bind:selectedEnvelope />
-		</div>
-		{#if selectedEnvelope}
-			<div
-				class="overflow-auto absolute sm:relative inset-0 bg-base-100 z-10"
-				in:fly={{ y: 100, duration: windowWidth < 640 ? 300 : 0 }}
-			>
-				<Envelope id={selectedEnvelope} onBack={() => (selectedEnvelope = null)} />
+<div class="fixed inset-0 bg-solid-100">
+	{#if loading}
+		<div class="h-full flex items-center justify-center">Loading...</div>
+	{:else if !email}
+		<Login {onVerify} />
+	{:else}
+		<div class="sm:grid sm:grid-cols-2 sm:grid-rows-1 relative" style="height: calc(100% - 5rem - 2px)">
+			<div class="sm:border-r-2 sm:border-base-200 overflow-auto h-full">
+				<Envelopes bind:selectedEnvelope />
 			</div>
-		{:else if windowWidth >= 640}
-			<div class="flex justify-center items-center opacity-50 italic">Select an envelope to view it in detail</div>
-		{/if}
-	</div>
-
-	<div class="h-20 border-t-2 border-base-200 flex items-center">
-		<div
-			class="flex items-center gap-1 select-none cursor-pointer p-4 hover:opacity-80 transition-opacity"
-			on:click={() => (newTransactionModalIsOpen = true)}
-		>
-			<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20" fill="currentColor">
-				<path
-					fill-rule="evenodd"
-					d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
-					clip-rule="evenodd"
-				/>
-			</svg>
-			<div class="hidden sm:block">Record Transaction</div>
+			{#if selectedEnvelope}
+				<div
+					class="overflow-auto absolute sm:relative inset-0 bg-base-100 z-10"
+					in:fly={{ y: 100, duration: windowWidth < 640 ? 300 : 0 }}
+				>
+					<Envelope id={selectedEnvelope} onBack={() => (selectedEnvelope = null)} />
+				</div>
+			{:else if windowWidth >= 640}
+				<div class="flex justify-center items-center opacity-50 italic">Select an envelope to view it in detail</div>
+			{/if}
 		</div>
 
-		<div class="flex-auto" />
+		<div class="h-20 border-t-2 border-base-200 flex items-center">
+			<div
+				class="flex items-center gap-1 select-none cursor-pointer p-4 hover:opacity-80 transition-opacity"
+				on:click={() => (newTransactionModalIsOpen = true)}
+			>
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20" fill="currentColor">
+					<path
+						fill-rule="evenodd"
+						d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+						clip-rule="evenodd"
+					/>
+				</svg>
+				<div class="hidden sm:block">Record Transaction</div>
+			</div>
 
-		<div class="badge badge-lg badge-primary">{formatMoney(getUserTotalBalance($db))}</div>
+			<div class="flex-auto" />
 
-		<div class="p-4 select-none cursor-pointer hover:opacity-80 transition-opacity" on:click={() => (settingsModalIsOpen = true)}>
-			<svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 20 20" fill="currentColor">
-				<path
-					fill-rule="evenodd"
-					d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
-					clip-rule="evenodd"
-				/>
-			</svg>
+			<div class="badge badge-lg badge-primary">{formatMoney(getUserTotalBalance($db))}</div>
+
+			<div class="p-4 select-none cursor-pointer hover:opacity-80 transition-opacity" on:click={() => (settingsModalIsOpen = true)}>
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 20 20" fill="currentColor">
+					<path
+						fill-rule="evenodd"
+						d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+						clip-rule="evenodd"
+					/>
+				</svg>
+			</div>
 		</div>
-	</div>
-{/if}
+	{/if}
 
-<SettingsModal bind:isOpen={settingsModalIsOpen} />
-<NewTransactionModal bind:isOpen={newTransactionModalIsOpen} />
+	<SettingsModal bind:isOpen={settingsModalIsOpen} />
+	<NewTransactionModal bind:isOpen={newTransactionModalIsOpen} />
+</div>
