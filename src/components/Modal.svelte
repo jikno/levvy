@@ -16,13 +16,11 @@
 />
 
 {#if isOpen}
-	<div class="fixed inset-0 z-40" style="background: rgba(0, 0, 0, 0.4)" in:fade on:click={() => (isOpen = false)} />
-
 	{#if windowWidth < 640}
 		<div
-			class="fixed bottom-0 right-0 left-0 z-40 bg-base-200 p-6 overflow-hidden rounded-t-2xl"
+			class="fixed inset-0 z-40 bg-base-200 p-6 overflow-hidden"
 			style="box-shadow: 0 0 25px 5px rgba(0, 0, 0, 0.25);"
-			in:fly={{ delay: 200, duration: 100, y: 50 }}
+			transition:fly={{ duration: 100, y: 50 }}
 		>
 			<div class="saftey">
 				{#if title}
@@ -34,6 +32,8 @@
 			</div>
 		</div>
 	{:else}
+		<div class="fixed inset-0 z-40" style="background: rgba(0, 0, 0, 0.4)" in:fade on:click={() => (isOpen = false)} />
+
 		<div class="fixed inset-0 z-40 pointer-events-none flex items-center justify-center">
 			<div
 				class="w-full max-w-sm bg-base-200 p-6 overflow-hidden shadow-2xl rounded-2xl pointer-events-auto"
