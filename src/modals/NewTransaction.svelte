@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Modal from '../components/Modal.svelte'
 	import { db, saveDb, Transaction } from '../db'
 	import {
 		allEnvelopesExist,
@@ -10,15 +9,18 @@
 		getUnallocatedAmount,
 		onEnter,
 		pickExpenseEnvelope,
+		randomUUID,
 	} from '../utils'
+
 	import EnvelopeDetails from './EnvelopeDetails.svelte'
+	import Modal from '../components/Modal.svelte'
 
 	export let isOpen = false
 
 	let envelopeDetailsIsOpen = false
 	let step = 1
 
-	let id = crypto.randomUUID()
+	let id = randomUUID()
 	let type: Transaction['type'] = 'expense'
 	let rawAmount = ''
 	let envelopes: Record<string, number> = {}
@@ -71,7 +73,7 @@
 	}
 
 	function reset() {
-		id = crypto.randomUUID()
+		id = randomUUID()
 		step = 1
 		rawAmount = ''
 		envelopes = {}

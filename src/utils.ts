@@ -1,5 +1,6 @@
 import { get } from 'svelte/store'
 import { DB, db, Envelope } from './db'
+import { v4 } from '@lukeed/uuid'
 
 export function formatMoney(money: number) {
 	if (money < 0) return `- $${(money * -1).toFixed(2)}`
@@ -174,4 +175,8 @@ export function getUserTotalBalance($db = get(db)) {
 	}
 
 	return balance
+}
+
+export function randomUUID() {
+	return v4()
 }

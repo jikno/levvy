@@ -1,6 +1,8 @@
 <script lang="ts">
-	import Modal from '../components/Modal.svelte'
 	import { db, saveDb, type Envelope } from '../db'
+	import { randomUUID } from '../utils'
+
+	import Modal from '../components/Modal.svelte'
 
 	/** If this param is supplied, the envelope will be edited instead of a new one created */
 	export let id: string | null = null
@@ -23,7 +25,7 @@
 		loading = true
 
 		const envelope: Envelope = {
-			id: id || crypto.randomUUID(),
+			id: id || randomUUID(),
 			name,
 			photo,
 			startingBalance: parseFloat(initialBalance),
