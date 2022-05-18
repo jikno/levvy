@@ -31,6 +31,11 @@
 		userString = newUserString
 		localStorage.setItem('stashed-user', userString)
 	}
+
+	function onLogout() {
+		userString = null
+		localStorage.clear()
+	}
 </script>
 
 <svelte:window bind:innerWidth={windowWidth} />
@@ -88,7 +93,7 @@
 		</div>
 	{/if}
 
-	<SettingsModal bind:isOpen={settingsModalIsOpen} />
+	<SettingsModal bind:isOpen={settingsModalIsOpen} {onLogout} />
 	<NewTransactionModal bind:isOpen={newTransactionModalIsOpen} />
 </div>
 
