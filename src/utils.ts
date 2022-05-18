@@ -180,3 +180,23 @@ export function getUserTotalBalance($db = get(db)) {
 export function randomUUID() {
 	return v4()
 }
+
+export function makeEncryptor(key: string) {
+	const textToChars = (text: string) => text.split('').map(c => c.charCodeAt(0))
+	const byteHex = (n: number) => ('0' + Number(n).toString(16)).substr(-2)
+	const applyKeyToChar = (code: number) => textToChars(key).reduce((a, b) => a ^ b, code)
+
+	function decrypt(encoded: string) {
+		return (encoded.match(/.{1,2}/g) || [])
+			.map(hex => parseInt(hex, 16))
+			.map(applyKeyToChar)
+			.map(charCode => String.fromCharCode(charCode))
+			.join('')
+	}
+
+	function encrypt(text: string) {
+		return textToChars(text).map(applyKeyToChar).map(byteHex).join('')
+	}
+
+	return { encrypt, decrypt }
+}

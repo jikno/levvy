@@ -11,23 +11,25 @@
 
 	let loading = false
 	let windowWidth: number
-	let email: string | null = localStorage.getItem('stashed-email') || null
+	let userString: string | null = localStorage.getItem('stashed-user') || null
 	let selectedEnvelope: string | null = null
 
 	let settingsModalIsOpen = false
 	let newTransactionModalIsOpen = false
 
-	// If the email was loaded from localstorage, load it's data
-	if (email) {
+	// If the user was stashed in localstorage, try to load it
+	if (userString) {
 		loading = true
-		populateDb(email).then(() => (loading = false))
+		populateDb(userString)
+			.catch(() => (userString = null))
+			.then(() => (loading = false))
 	}
 
-	async function onVerify(newEmail: string) {
-		await populateDb(newEmail)
+	async function onVerify(newUserString: string) {
+		await populateDb(newUserString) // function will thow if the user string is incorrect
 
-		email = newEmail
-		localStorage.setItem('stashed-email', email)
+		userString = newUserString
+		localStorage.setItem('stashed-user', userString)
 	}
 </script>
 
@@ -36,7 +38,7 @@
 <div class="fixed inset-0 bg-solid-100">
 	{#if loading}
 		<div class="h-full flex items-center justify-center">Loading...</div>
-	{:else if !email}
+	{:else if !userString}
 		<Login {onVerify} />
 	{:else}
 		<div class="sm:grid sm:grid-cols-2 sm:grid-rows-1 relative" style="height: calc(100% - 5rem - 2px)">
