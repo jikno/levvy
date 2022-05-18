@@ -170,7 +170,10 @@
 			</div>
 
 			<p class="p2-2 opacity-50 italic">
-				Envelope balance after transaction will be {formatMoney($db.envelopes[id].balance - amount)}
+				<!-- We just have to be sure that we subtract and add when appropriate -->
+				Envelope balance after transaction will be {formatMoney(
+					$db.envelopes[id].balance + (type === 'expense' ? -1 * amount : amount)
+				)}
 			</p>
 
 			<div class="my-2 h-[2px] bg-base-200" />
