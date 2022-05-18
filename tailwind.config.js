@@ -68,5 +68,16 @@
 
 module.exports = {
 	content: ['./public/index.html', './src/**/*.svelte'],
+	daisyui: {
+		themes: [
+			{
+				dark: {
+					...require('daisyui/src/colors/themes')['[data-theme=dark]'],
+					primary: '#4c75cf',
+					'primary-focus': '#334e90',
+				},
+			},
+		],
+	},
 	plugins: [require('daisyui')],
 }

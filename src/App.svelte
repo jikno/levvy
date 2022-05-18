@@ -39,7 +39,7 @@
 	<Login {onVerify} />
 {:else}
 	<div class="sm:grid sm:grid-cols-2 sm:grid-rows-1 relative" style="height: calc(100% - 5rem - 2px)">
-		<div class="sm:border-r-2 sm:border-base-200 overflow-auto">
+		<div class="sm:border-r-2 sm:border-base-200 overflow-auto h-full">
 			<Envelopes bind:selectedEnvelope />
 		</div>
 		{#if selectedEnvelope}
@@ -49,7 +49,7 @@
 			>
 				<Envelope id={selectedEnvelope} onBack={() => (selectedEnvelope = null)} />
 			</div>
-		{:else}
+		{:else if windowWidth >= 640}
 			<div class="flex justify-center items-center opacity-50 italic">Select an envelope to view it in detail</div>
 		{/if}
 	</div>
