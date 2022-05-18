@@ -51,7 +51,13 @@
 		<div class="h-4" />
 
 		<p>Set an initial balance: (can be nagative)</p>
-		<input type="decimal" class="input input-bordered w-full" placeholder="eg. Groceries" bind:value={initialBalance} />
+		<input
+			type="number"
+			inputmode="decimal"
+			class="input input-bordered w-full"
+			placeholder="eg. Groceries"
+			bind:value={initialBalance}
+		/>
 		<div class="h-4" />
 
 		<p>Set a photo:</p>

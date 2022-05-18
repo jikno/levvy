@@ -96,7 +96,8 @@
 		<div class="h-1" />
 
 		<input
-			type="decimal"
+			type="number"
+			inputmode="decimal"
 			class="input input-bordered w-full {type === 'expense' ? 'text-error' : 'text-success'}"
 			bind:value={rawAmount}
 			use:onEnter={{ cb: next }}
@@ -145,7 +146,8 @@
 				<div>
 					<input
 						class="input input-bordered w-full"
-						type="decimal"
+						type="number"
+						inputmode="decimal"
 						value={envelopes[id]}
 						on:input={event => (envelopes[id] = parseFloat(event.currentTarget.value))}
 					/>
