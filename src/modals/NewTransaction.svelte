@@ -257,7 +257,7 @@
 
 		<button class="btn {step === 3 ? 'btn-primary' : ''}" disabled={!valid || loading} on:click={saveAndClose}>Save</button>
 		{#if step !== 3}
-			<button class="btn btn-primary" disabled={!valid || loading} on:click={next}>Next</button>
+			<button class="btn btn-primary" on:click={next}>Next</button>
 		{/if}
 	</div>
 </Modal>
