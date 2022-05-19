@@ -105,7 +105,10 @@
 </div>
 
 <!-- Modals -->
-<EnvelopeDetailsModal bind:isOpen={showEditModal} {id} />
+{#key id}
+	<EnvelopeDetailsModal bind:isOpen={showEditModal} {id} />
+{/key}
+
 {#if lastSelectedTransactionId}
 	<TransactionModal bind:isOpen={showTransactionModal} id={lastSelectedTransactionId} />
 {/if}
