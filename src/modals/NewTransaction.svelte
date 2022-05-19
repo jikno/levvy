@@ -29,7 +29,7 @@
 	let label = ''
 
 	$: unallocated = amount - getAllocatedAmount(envelopes)
-	$: valid = /^\d+(\.\d+)?$/.test(rawAmount) && allEnvelopesExist(envelopes) && !(unallocated < 0)
+	$: valid = /^\d+(\.\d+)?$/.test(rawAmount) && allEnvelopesExist(envelopes) && unallocated === 0
 	$: amount = parseFloat(rawAmount)
 
 	let loading = false
@@ -90,6 +90,23 @@
 		resolveIncomeType(unallocated, envelopes, incomeType)
 		envelopes = envelopes
 	}
+
+	let assigningAmountToEnvelope: string | null = null
+
+	// This function basically just tries to initially asign the amount to an envelope.
+	// But, if it detects the envelopes have been messed with, it doesn't do anything
+	function rawAmountChange() {
+		const envelopeIds = Object.keys(envelopes)
+
+		if (!envelopeIds.length) {
+			assigningAmountToEnvelope = pickExpenseEnvelope(envelopes)
+			envelopes[assigningAmountToEnvelope] = amount
+		} else if (envelopeIds.length === 1 && assigningAmountToEnvelope !== null && envelopes[assigningAmountToEnvelope] !== undefined) {
+			envelopes[assigningAmountToEnvelope] = amount
+		} else {
+			assigningAmountToEnvelope = null
+		}
+	}
 </script>
 
 <Modal bind:isOpen title="New Transaction">
@@ -113,6 +130,7 @@
 			bind:value={rawAmount}
 			use:onEnter={{ cb: next }}
 			use:autofocus
+			on:input={rawAmountChange}
 		/>
 	{:else if step === 2}
 		<p>Name this transaction:</p>
