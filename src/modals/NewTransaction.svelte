@@ -10,6 +10,7 @@
 		onEnter,
 		pickExpenseEnvelope,
 		randomUUID,
+		resolveIncomeType,
 	} from '../utils'
 
 	import EnvelopeDetails from './EnvelopeDetails.svelte'
@@ -19,6 +20,7 @@
 
 	let envelopeDetailsIsOpen = false
 	let step = 1
+	let selectedIncomeTypeId: string | null = null
 
 	let id = randomUUID()
 	let type: Transaction['type'] = 'expense'
@@ -79,6 +81,14 @@
 		rawAmount = ''
 		envelopes = {}
 		label = ''
+	}
+
+	function applyIncomeType() {
+		const incomeType = $db.incomeTypes.find(incomeType => incomeType.id === selectedIncomeTypeId)
+		if (!incomeType) throw new Error('Selected id does not exist')
+
+		resolveIncomeType(unallocated, envelopes, incomeType)
+		envelopes = envelopes
 	}
 </script>
 
@@ -194,6 +204,27 @@
 			</button>
 		{:else}
 			<button class="btn btn-link p-0" on:click={() => (envelopeDetailsIsOpen = true)}>Create an Envelope</button>
+		{/if}
+
+		{#if type === 'income' && $db.incomeTypes.length}
+			<div class="h-2" />
+
+			<p>Apply an income type:</p>
+			<div class="h-1" />
+
+			<div class="flex">
+				<div>
+					<select class="select select-bordered w-full" bind:value={selectedIncomeTypeId}>
+						{#each $db.incomeTypes as incomeType}
+							<option value={incomeType.id}>{incomeType.name}</option>
+						{/each}
+					</select>
+				</div>
+
+				<div class="flex-auto" />
+
+				<button class="btn" on:click={applyIncomeType}>Apply</button>
+			</div>
 		{/if}
 	{/if}
 

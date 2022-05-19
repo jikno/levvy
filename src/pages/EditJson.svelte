@@ -62,7 +62,7 @@
 <div class="h-full relative flex flex-col">
 	<div class="overflow-auto p-6 flex-auto" bind:this={editor} />
 
-	<div class="bg-base-100 flex items-center justify-end gap-4 p-6">
+	<div class="bg-base-100 flex items-center justify-end gap-4 p-6 relative">
 		{#if !parsed}
 			<div class="text-sm italic opacity-50">Cannot save while there are errors in the document</div>
 		{/if}

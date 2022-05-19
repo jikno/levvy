@@ -3,8 +3,36 @@ import { makeEncryptor } from './utils'
 
 export interface DB {
 	email: string | null
+	incomeTypes: IncomeType[]
 	envelopes: Record<string, Envelope> // id -> Envelope
 	transactions: Record<string, Transaction> // id -> Transaction
+}
+
+export interface IncomeType {
+	id: string
+	name: string
+	operations: IncomeTypeOperation[]
+}
+
+export type IncomeTypeOperation = FixedTakeOperation | VariableTakeOperation | SplitOperation
+
+export interface FixedTakeOperation {
+	operation: 'fixed-take'
+	envelopeId: string
+	amount: number
+}
+
+export interface VariableTakeOperation {
+	operation: 'variable-take'
+	envelopeId: string
+	percentage: number
+	maxAmount?: number
+	minAmount?: number
+}
+
+export interface SplitOperation {
+	operation: 'split'
+	envelopePercentages: Record<string, number>
 }
 
 export interface Envelope {
@@ -24,11 +52,9 @@ export interface Transaction {
 	date: number
 }
 
-export const db = writable<DB>({
-	email: null,
-	envelopes: {},
-	transactions: {},
-})
+export const defaultDbData: DB = { email: null, incomeTypes: [], envelopes: {}, transactions: {} }
+
+export const db = writable<DB>(defaultDbData)
 let stashedPasswordForSaves: string | null = null
 
 const dbUrl = `https://vehmloewff-keyed-db.deno.dev/finance`

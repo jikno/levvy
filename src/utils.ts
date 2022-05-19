@@ -1,5 +1,5 @@
 import { get } from 'svelte/store'
-import { DB, db, Envelope } from './db'
+import { DB, db, Envelope, IncomeType } from './db'
 import { v4 } from '@lukeed/uuid'
 
 export function formatMoney(money: number) {
@@ -201,4 +201,47 @@ export function makeEncryptor(key: string) {
 	}
 
 	return { encrypt, decrypt }
+}
+
+export function applyPercentage(number: number, percent: number) {
+	return number * percent * 0.01
+}
+
+export function resolveIncomeType(amount: number, envelopes: Record<string, number>, incomeType: IncomeType) {
+	let amountLeft = amount
+
+	const addAmount = (envelopeId: string, amount: number) => {
+		if (envelopes[envelopeId]) envelopes[envelopeId] += amount
+		else envelopes[envelopeId] = amount
+	}
+
+	for (const operation of incomeType.operations) {
+		if (operation.operation === 'fixed-take') {
+			amountLeft -= operation.amount
+			addAmount(operation.envelopeId, operation.amount)
+		} else if (operation.operation === 'variable-take') {
+			let amountToTake = applyPercentage(amountLeft, operation.percentage)
+
+			if (operation.minAmount && amountToTake < operation.minAmount) amountToTake = operation.minAmount
+			if (operation.maxAmount && amountToTake > operation.maxAmount) amountToTake = operation.maxAmount
+
+			amountLeft -= amountToTake
+			addAmount(operation.envelopeId, amountToTake)
+		} else if (operation.operation === 'split') {
+			let amountAtStartOfOperation = amountLeft
+
+			for (const envelopeId in operation.envelopePercentages) {
+				const percent = operation.envelopePercentages[envelopeId]
+				const amountToTake = applyPercentage(amountAtStartOfOperation, percent)
+
+				amountLeft -= amountToTake
+				addAmount(envelopeId, amountToTake)
+			}
+		}
+	}
+
+	return {
+		amountLeft,
+		envelopes,
+	}
 }

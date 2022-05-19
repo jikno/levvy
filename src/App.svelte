@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition'
 	import { formatMoney, getUserTotalBalance } from './utils'
-	import { db, populateDb } from './db'
+	import { db, defaultDbData, populateDb } from './db'
 
 	import NewTransactionModal from './modals/NewTransaction.svelte'
 	import SettingsModal from './modals/Settings.svelte'
@@ -113,7 +113,7 @@
 		</div>
 	{/if}
 
-	<SettingsModal bind:isOpen={settingsModalIsOpen} {onLogout} />
+	<SettingsModal bind:isOpen={settingsModalIsOpen} {onLogout} showJSON={() => (editJson = true)} />
 	<NewTransactionModal bind:isOpen={newTransactionModalIsOpen} />
 </div>
 

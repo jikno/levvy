@@ -5,6 +5,7 @@
 
 	export let isOpen = false
 	export let onLogout: () => void
+	export let showJSON: () => void
 
 	let loading = false
 	let valid = true
@@ -24,6 +25,23 @@
 				isOpen = false
 				onLogout()
 			}}>Logout</button
+		>
+	</div>
+
+	<div class="h-8" />
+
+	<div class="flex items-center">
+		<div class="flex-auto">
+			<div class="italic text-sm opacity-50">Income Types</div>
+			<a class="link" href="https://github.com/Vehmloewff/private-finance/blob/master/income-types.md">View Documentation</a>
+		</div>
+
+		<button
+			class="btn btn-link btn-primary p-0"
+			on:click={() => {
+				isOpen = false
+				showJSON()
+			}}>Edit Json</button
 		>
 	</div>
 
