@@ -18,7 +18,7 @@
 {#if isOpen}
 	{#if windowWidth < 640}
 		<div
-			class="fixed inset-0 z-40 bg-base-200 p-6 overflow-hidden"
+			class="fixed inset-0 z-40 bg-base-200 p-6 overflow-auto"
 			style="box-shadow: 0 0 25px 5px rgba(0, 0, 0, 0.25);"
 			transition:fly={{ duration: 100, y: 50 }}
 		>
@@ -36,7 +36,8 @@
 
 		<div class="fixed inset-0 z-40 pointer-events-none flex items-center justify-center">
 			<div
-				class="w-full max-w-sm bg-base-200 p-6 overflow-hidden shadow-2xl rounded-2xl pointer-events-auto"
+				class="w-full max-w-sm bg-base-200 p-6 shadow-2xl rounded-2xl pointer-events-auto overflow-auto"
+				style="max-height: calc(100vh * 0.8);"
 				in:scale={{ delay: 100, start: 0.8, easing: elasticOut }}
 			>
 				{#if title}
