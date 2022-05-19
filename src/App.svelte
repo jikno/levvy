@@ -36,6 +36,7 @@
 
 	function onLogout() {
 		userString = null
+		$db = defaultDbData
 		localStorage.clear()
 	}
 </script>
