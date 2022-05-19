@@ -58,7 +58,7 @@
 			{#if selectedEnvelope}
 				<div
 					class="overflow-auto absolute sm:relative inset-0 bg-base-100 z-10"
-					in:fly={{ y: 100, duration: windowWidth < 640 ? 300 : 0 }}
+					transition:fly={{ y: 100, duration: windowWidth < 640 ? 300 : 0 }}
 				>
 					<Envelope id={selectedEnvelope} onBack={() => (selectedEnvelope = null)} />
 				</div>
