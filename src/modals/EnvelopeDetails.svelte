@@ -55,7 +55,7 @@
 			type="number"
 			inputmode="decimal"
 			class="input input-bordered w-full"
-			placeholder="eg. Groceries"
+			placeholder="enter a number... (can be negative or zero)"
 			bind:value={initialBalance}
 		/>
 		<div class="h-4" />
