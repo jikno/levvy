@@ -8,11 +8,13 @@
 	import Envelope from './pages/Envelope.svelte'
 	import Envelopes from './pages/Envelopes.svelte'
 	import Login from './pages/Login.svelte'
+	import EditJson from './pages/EditJson.svelte'
 
 	let loading = false
 	let windowWidth: number
 	let userString: string | null = localStorage.getItem('stashed-user') || null
 	let selectedEnvelope: string | null = null
+	let editJson = false
 
 	let settingsModalIsOpen = false
 	let newTransactionModalIsOpen = false
@@ -45,6 +47,8 @@
 		<div class="h-full flex items-center justify-center">Loading...</div>
 	{:else if !userString}
 		<Login {onVerify} />
+	{:else if editJson}
+		<EditJson onClose={() => (editJson = false)} />
 	{:else}
 		<div class="sm:grid sm:grid-cols-2 sm:grid-rows-1 relative" style="height: calc(100% - 5rem - 2px)">
 			<div class="sm:border-r-2 sm:border-base-200 overflow-auto h-full">
@@ -79,9 +83,22 @@
 
 			<div class="flex-auto" />
 
-			<div class="badge badge-lg badge-primary">{formatMoney(getUserTotalBalance($db))}</div>
+			<div class="badge badge-lg badge-primary m-2">{formatMoney(getUserTotalBalance($db))}</div>
 
-			<div class="p-4 select-none cursor-pointer hover:opacity-80 transition-opacity" on:click={() => (settingsModalIsOpen = true)}>
+			<div class="p-2 select-none cursor-pointer hover:opacity-80 transition-opacity" on:click={() => (editJson = true)}>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="h-7 w-7"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+					stroke-width="2"
+				>
+					<path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+				</svg>
+			</div>
+
+			<div class="p-2 select-none cursor-pointer hover:opacity-80 transition-opacity" on:click={() => (settingsModalIsOpen = true)}>
 				<svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 20 20" fill="currentColor">
 					<path
 						fill-rule="evenodd"
