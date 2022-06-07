@@ -9,8 +9,10 @@
 	import Envelopes from './pages/Envelopes.svelte'
 	import Login from './pages/Login.svelte'
 	import EditJson from './pages/EditJson.svelte'
+	import LockScreen from './components/LockScreen.svelte'
 
 	let loading = false
+	let locked = true
 	let windowWidth: number
 	let userString: string | null = localStorage.getItem('stashed-user') || null
 	let selectedEnvelope: string | null = null
@@ -41,7 +43,7 @@
 	}
 </script>
 
-<svelte:window bind:innerWidth={windowWidth} />
+<svelte:window bind:innerWidth={windowWidth} on:blur={() => (locked = true)} />
 
 <div class="fixed inset-0 bg-solid-100 over">
 	{#if loading}
@@ -115,6 +117,10 @@
 
 	<SettingsModal bind:isOpen={settingsModalIsOpen} {onLogout} showJSON={() => (editJson = true)} />
 	<NewTransactionModal bind:isOpen={newTransactionModalIsOpen} />
+
+	{#if locked}
+		<LockScreen onUnlock={() => (locked = false)} />
+	{/if}
 </div>
 
 <style>

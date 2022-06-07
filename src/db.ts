@@ -3,6 +3,7 @@ import { makeEncryptor } from './utils'
 
 export interface DB {
 	email: string | null
+	pin: string | null
 	incomeTypes: IncomeType[]
 	envelopes: Record<string, Envelope> // id -> Envelope
 	transactions: Record<string, Transaction> // id -> Transaction
@@ -52,7 +53,7 @@ export interface Transaction {
 	date: number
 }
 
-export const defaultDbData: DB = { email: null, incomeTypes: [], envelopes: {}, transactions: {} }
+export const defaultDbData: DB = { email: null, pin: null, incomeTypes: [], envelopes: {}, transactions: {} }
 
 export const db = writable<DB>(defaultDbData)
 let stashedPasswordForSaves: string | null = null
