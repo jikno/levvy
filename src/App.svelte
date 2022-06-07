@@ -34,6 +34,7 @@
 
 		userString = newUserString
 		localStorage.setItem('stashed-user', userString)
+		locked = false
 	}
 
 	function onLogout() {
@@ -113,14 +114,14 @@
 
 			<div class="w-2" />
 		</div>
+
+		{#if locked}
+			<LockScreen onUnlock={() => (locked = false)} />
+		{/if}
 	{/if}
 
 	<SettingsModal bind:isOpen={settingsModalIsOpen} {onLogout} showJSON={() => (editJson = true)} />
 	<NewTransactionModal bind:isOpen={newTransactionModalIsOpen} />
-
-	{#if locked}
-		<LockScreen onUnlock={() => (locked = false)} />
-	{/if}
 </div>
 
 <style>
