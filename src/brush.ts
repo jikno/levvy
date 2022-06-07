@@ -1,3 +1,5 @@
+import { text } from 'svelte/internal'
+
 export interface HighlightStyles {
 	color?: string
 	background?: string
@@ -74,15 +76,35 @@ export function makeBrush(params: BrushParams) {
 
 	// Anytime the text in the textarea changes, sync it to the highlights div
 	const unsubscribe = (() => {
-		const handler = () => {
+		const inputHandler = () => {
 			params.onChange(textarea.value)
 			highlightsDiv.innerHTML = highlight(textarea.value)
 		}
 
-		textarea.addEventListener('input', handler)
+		textarea.addEventListener('input', inputHandler)
+
+		const keydownHandler = (event: KeyboardEvent & { currentTarget: HTMLTextAreaElement }) => {
+			if (event.key !== 'Tab') return
+
+			event.preventDefault()
+
+			const start = event.currentTarget.selectionStart
+			const end = event.currentTarget.selectionEnd
+
+			// set textarea value to: text before caret + tab + text after caret
+			event.currentTarget.value = event.currentTarget.value.substring(0, start) + '\t' + event.currentTarget.value.substring(end)
+
+			// put caret at right position again
+			event.currentTarget.selectionStart = event.currentTarget.selectionEnd = start + 1
+
+			inputHandler()
+		}
+
+		textarea.addEventListener('keydown', keydownHandler as any)
 
 		return () => {
-			textarea.removeEventListener('input', handler)
+			textarea.removeEventListener('input', inputHandler)
+			textarea.removeEventListener('keydown', keydownHandler as any)
 		}
 	})()
 
