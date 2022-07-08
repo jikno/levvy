@@ -10,6 +10,7 @@
 	import Login from './pages/Login.svelte'
 	import EditJson from './pages/EditJson.svelte'
 	import LockScreen from './components/LockScreen.svelte'
+	import { optimize } from './optimize'
 
 	let loading = false
 	let locked = true
@@ -27,6 +28,7 @@
 		populateDb(userString)
 			.catch(() => (userString = null))
 			.then(() => (loading = false))
+			.then(() => optimize())
 	}
 
 	async function onVerify(newUserString: string) {
