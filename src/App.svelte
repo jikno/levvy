@@ -42,9 +42,21 @@
 		$db = defaultDbData
 		localStorage.clear()
 	}
+
+	let lockTimeout: any
+	function appBlur() {
+		clearTimeout(lockTimeout)
+
+		const fiveMinutes = 1000 * 60 * 5
+		setTimeout(() => (locked = true), fiveMinutes)
+	}
+
+	function appFocus() {
+		clearTimeout(lockTimeout)
+	}
 </script>
 
-<svelte:window bind:innerWidth={windowWidth} on:blur={() => (locked = true)} />
+<svelte:window bind:innerWidth={windowWidth} on:blur={appBlur} on:focus={appFocus} />
 
 <div class="fixed inset-0 bg-solid-100 over">
 	{#if loading}
