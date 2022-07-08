@@ -50,7 +50,13 @@
 							<div class="flex text-lg">
 								<div>{envelope.name}</div>
 								<div class="flex-auto" />
-								<div>{formatMoney(envelope.balance)}</div>
+								<div
+									class="
+									rounded-lg px-2 py-1
+									{envelope.balance < 0 ? 'bg-error text-error-content' : 'bg-success text-success-content'}"
+								>
+									{formatMoney(envelope.balance)}
+								</div>
 							</div>
 						</div>
 					</div>

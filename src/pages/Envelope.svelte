@@ -61,7 +61,14 @@
 		<div class="h-20" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0))" />
 	</div>
 
-	<div class="text-3xl py-2 px-3 rounded-lg" style="background: rgba(0, 0, 0, 0.7)">{formatMoney(envelope.balance)}</div>
+	<div
+		class="
+			text-3xl py-2 px-3 rounded-lg
+			{envelope.balance < 0 ? 'bg-error text-error-content' : 'bg-success text-success-content'}
+		"
+	>
+		{formatMoney(envelope.balance)}
+	</div>
 </div>
 
 <div class="p-2">
