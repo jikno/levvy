@@ -35,5 +35,5 @@ export async function optimize() {
 	console.log(`[optimization] Deleted ${transactionsToRemove.length} older transaction(s)`)
 
 	// Update the database
-	await saveDb()
+	if (transactionsToRemove.length) await saveDb()
 }
