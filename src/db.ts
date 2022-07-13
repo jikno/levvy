@@ -76,7 +76,9 @@ export async function populateDb(userString: string) {
 			throw new Error(`Error when populating db: ${await res.text()}`)
 		}
 
-		return res.text()
+		const text = await res.text()
+
+		return text.replace(/\x19/g, '')
 	})
 
 	// If the email is not in the cloud, create a local version...
