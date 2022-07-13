@@ -9,6 +9,8 @@
 	let escapeCount = 0
 	let shake = false
 
+	let screenType: 'mouse' | 'touch' | null = null
+
 	const keypad = [
 		{ digit: '1', letters: '' },
 		{ digit: '2', letters: 'abc' },
@@ -115,8 +117,18 @@
 							text-2xl rounded-full relative
 							cursor-pointer select-none
 						"
-						on:mousedown={() => applyDigit(digit)}
-						on:touchstart={() => applyDigit(digit)}
+						on:mousedown={() => {
+							if (!screenType) screenType = 'mouse'
+							if (screenType === 'touch') return
+
+							applyDigit(digit)
+						}}
+						on:touchstart={() => {
+							if (!screenType) screenType = 'touch'
+							if (screenType === 'mouse') return
+
+							applyDigit(digit)
+						}}
 					>
 						<div class="relative bottom-1">{digit}</div>
 
