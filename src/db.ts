@@ -76,9 +76,7 @@ export async function populateDb(userString: string) {
 			throw new Error(`Error when populating db: ${await res.text()}`)
 		}
 
-		const text = await res.text()
-
-		return text.replace(/\x19/g, '')
+		return res.text()
 	})
 
 	// If the email is not in the cloud, create a local version...
@@ -109,7 +107,7 @@ export async function populateDb(userString: string) {
 	try {
 		console.log('Trying to decrypt data retrieved from the cloud...')
 
-		const json = JSON.parse(encryptor.decrypt(text))
+		const json = JSON.parse(encryptor.decrypt(text).replace(/\x19/g, ''))
 		console.log('Successfully decrypted!')
 
 		return db.set(json)
