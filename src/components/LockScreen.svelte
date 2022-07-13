@@ -115,7 +115,8 @@
 							text-2xl rounded-full relative
 							cursor-pointer select-none
 						"
-						on:click={() => applyDigit(digit)}
+						on:mousedown={() => applyDigit(digit)}
+						on:touchstart={() => applyDigit(digit)}
 					>
 						<div class="relative bottom-1">{digit}</div>
 
