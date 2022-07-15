@@ -2,10 +2,23 @@ import { get } from 'svelte/store'
 import { DB, db, Envelope, IncomeType } from './db'
 import { v4 } from '@lukeed/uuid'
 
-export function formatMoney(money: number) {
-	if (money < 0) return `- $${(money * -1).toFixed(2)}`
+export function addCommas(number: string): string {
+	if (number.length <= 3) return number
 
-	return `$${money.toFixed(2)}`
+	const extra = number.length - 3
+	return `${addCommas(number.slice(0, extra))},${number.slice(extra)}`
+}
+
+export function addCommasToDecimal(number: string) {
+	const [wholeNumber, cents] = number.split('.')
+
+	return `${addCommas(wholeNumber)}.${cents}`
+}
+
+export function formatMoney(money: number) {
+	if (money < 0) return `- $${addCommasToDecimal((money * -1).toFixed(2))}`
+
+	return `$${addCommasToDecimal(money.toFixed(2))}`
 }
 
 export interface CompiledTransaction {
