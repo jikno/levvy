@@ -50,7 +50,7 @@
 		clearTimeout(lockTimeout)
 
 		const fiveMinutes = 1000 * 60 * 5
-		setTimeout(() => (locked = true), fiveMinutes)
+		lockTimeout = setTimeout(() => (locked = true), fiveMinutes)
 	}
 
 	function appFocus() {
