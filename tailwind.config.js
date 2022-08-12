@@ -67,19 +67,17 @@
 // }
 
 module.exports = {
-	content: ['./public/index.html', './src/**/*.svelte'],
-	daisyui: {
-		themes: [
-			{
-				dark: {
-					...require('daisyui/src/colors/themes')['[data-theme=dark]'],
-					primary: '#98c379',
-					'primary-focus': '#659d3d',
-					'primary-content': '#2a303c',
-					success: '#98c379',
-				},
-			},
-		],
-	},
-	plugins: [require('daisyui')],
+    content: ['./public/index.html', './src/**/*.svelte'],
+    daisyui: {
+        themes: [{
+            dark: {
+                ...require('daisyui/src/colors/themes')['[data-theme=dark]'],
+                primary: '#98c379',
+                'primary-focus': '#659d3d',
+                'primary-content': '#2a303c',
+                success: '#98c379',
+            },
+        }, ],
+    },
+    plugins: [require('daisyui')],
 }
