@@ -77,9 +77,12 @@ module.exports = {
 					'primary-focus': '#659d3d',
 					'primary-content': '#2a303c',
 					success: '#98c379',
-				},
-			},
-		],
+					warning: '#fcd34d',
+					info: '#e2e8f0',
+					danger: '#ef4444'
+				}
+			}
+		]
 	},
-	plugins: [require('daisyui')],
+	plugins: [require('daisyui')]
 }
