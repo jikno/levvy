@@ -135,7 +135,7 @@ export function makeBrush(params: BrushParams) {
 				allHighlights.push({
 					loc: [currentIndex, start],
 					style: params.defaultStyle,
-					text: value.slice(currentIndex, start),
+					text: value.slice(currentIndex, start)
 				})
 
 			allHighlights.push(highlight)
@@ -146,7 +146,7 @@ export function makeBrush(params: BrushParams) {
 			allHighlights.push({
 				loc: [currentIndex, value.length],
 				style: params.defaultStyle,
-				text: value.slice(currentIndex, value.length),
+				text: value.slice(currentIndex, value.length)
 			})
 
 		return allHighlights
@@ -182,6 +182,6 @@ export function makeBrush(params: BrushParams) {
 	return {
 		destroy() {
 			unsubscribe()
-		},
+		}
 	}
 }

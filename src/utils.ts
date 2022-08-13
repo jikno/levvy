@@ -48,7 +48,7 @@ export function compileEnvelopeTransactions(envelopeId: string, $db = get(db)) {
 			label: transaction.label,
 			transactionId: transaction.id,
 			balanceAt: currentBalance,
-			date: transaction.date,
+			date: transaction.date
 		})
 
 		if (transaction.type === 'income') currentBalance -= amount
@@ -83,7 +83,7 @@ export function clickOutside(node: HTMLElement, { enabled, cb }: ClickOutsidePar
 		update,
 		destroy() {
 			window.removeEventListener('click', handleOutsideClick)
-		},
+		}
 	}
 }
 
@@ -108,7 +108,7 @@ export function onEnter(node: HTMLElement, { enabled, cb }: ClickOutsideParams) 
 		update,
 		destroy() {
 			window.removeEventListener('keyup', handler)
-		},
+		}
 	}
 }
 
@@ -255,6 +255,6 @@ export function resolveIncomeType(amount: number, envelopes: Record<string, numb
 
 	return {
 		amountLeft,
-		envelopes,
+		envelopes
 	}
 }

@@ -1,31 +1,31 @@
-import { writable } from 'svelte/store';
-
+import { writable } from 'svelte/store'
 
 export interface ToastParams {
-    message: string
-    type?: 'success'
-    timeout?: number
+	message: string
+	type?: 'success'
+	timeout?: number
 }
 
 export interface Toast extends ToastParams {
-    close: () => void
+	close: () => void
 }
 
-export const currentToasts = writable<Toast[]>([]);
+export const currentToasts = writable<Toast[]>([])
 
 export const toast = async (params: ToastParams) => {
-    const close = () => currentToasts.update(toasts => {
-        toasts.splice(toasts.indexOf(toast), 1)
-        return toasts
-    })
-    const toast: Toast = {
-        message: params.message,
-        type: params.type || 'info',
-        timeout: params.timeout || 3000,
-        close: close
-    }
+	const close = () =>
+		currentToasts.update(toasts => {
+			toasts.splice(toasts.indexOf(toast), 1)
+			return toasts
+		})
+	const toast: Toast = {
+		message: params.message,
+		type: params.type || 'info',
+		timeout: params.timeout || 3000,
+		close: close
+	}
 
-    currentToasts.update(toasts => [...toasts, toast])
+	currentToasts.update(toasts => [...toasts, toast])
 
-    await setTimeout(() => close, toast.timeout);
+	await setTimeout(() => close, toast.timeout)
 }
