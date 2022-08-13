@@ -58,6 +58,8 @@
   function appFocus() {
     clearTimeout(lockTimeout);
   }
+
+  currentToasts.subscribe((toasts) => console.log("TOAST CHANGED", toasts));
 </script>
 
 <svelte:window
@@ -177,15 +179,9 @@
   />
   <NewTransactionModal bind:isOpen={newTransactionModalIsOpen} />
 
-  <!-- {#each $currentToasts as toast} -->
-  <Toast
-    params={{
-      message: "Pin Saved!",
-      type: "success",
-      close: () => console.log("Close the stupid toast"),
-    }}
-  />
-  <!-- {/each} -->
+  {#each $currentToasts as params}
+    <Toast {params} />
+  {/each}
 </div>
 
 <style>

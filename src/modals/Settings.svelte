@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { db } from "../db";
+  import { db, saveDb } from "../db";
 
   import Modal from "../components/Modal.svelte";
   import { toast } from "../toast";
@@ -20,9 +20,10 @@
       data.pin = pin!.toString();
       return data;
     });
+    saveDb();
 
     // Toast message for pin saved
-    toast({ message: "Pin saved", type: "success" });
+    toast({ message: "Pin saved!", type: "success" });
 
     // reset pin value
     pin = null;
