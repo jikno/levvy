@@ -1,7 +1,7 @@
 {
 	"$schema": "https://json.schemastore.org/web-manifest-combined.json",
-	"name": "Finance",
-	"short_name": "Finance",
+	"name": "Levvy",
+	"short_name": "Levvy",
 	"icons": [
 		{
 			"src": "/android-chrome-192x192.png",
@@ -14,7 +14,7 @@
 			"type": "image/png"
 		}
 	],
-	"theme_color": "#98c379",
+	"theme_color": "#FFDD00",
 	"background_color": "#2a303c",
 	"display": "standalone",
 	"orientation": "portrait"

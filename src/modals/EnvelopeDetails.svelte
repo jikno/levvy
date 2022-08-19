@@ -29,7 +29,7 @@
 			name,
 			photo,
 			startingBalance: parseFloat(initialBalance),
-			balance: parseFloat(initialBalance),
+			balance: parseFloat(initialBalance)
 		}
 		$db.envelopes[envelope.id] = envelope
 
@@ -50,7 +50,7 @@
 		<input type="text" class="input input-bordered w-full placeholder:opacity-50" placeholder="eg. Groceries" bind:value={name} />
 		<div class="h-4" />
 
-		<p>Set an initial balance: (can be nagative)</p>
+		<p>Set an initial balance: (can be negative)</p>
 		<input
 			type="number"
 			inputmode="decimal"

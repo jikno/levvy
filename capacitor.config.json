@@ -1,6 +1,6 @@
 {
-	"appId": "com.vehmloewff.finance",
-	"appName": "Finance",
+	"appId": "com.jikno.levvy",
+	"appName": "Levvy",
 	"bundledWebRuntime": false,
 	"webDir": "public",
 	"plugins": {

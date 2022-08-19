@@ -32,7 +32,13 @@
 			</div>
 		</div>
 	{:else}
-		<div class="fixed inset-0 z-40" style="background: rgba(0, 0, 0, 0.4)" in:fade on:click={() => (isOpen = false)} />
+		<div
+			class="fixed inset-0 z-40 backdrop-blur-sm"
+			style="background: rgba(0, 0, 0, 0.4)"
+			in:fade={{ duration: 150 }}
+			out:fade={{ duration: 50 }}
+			on:click={() => (isOpen = false)}
+		/>
 
 		<div class="fixed inset-0 z-40 pointer-events-none flex items-center justify-center">
 			<div

@@ -47,9 +47,8 @@
 						<div class="absolute inset-0" style="background: rgba(0, 0, 0, 0.7)" />
 
 						<div class="card-body z-10 select-none cursor-pointer">
-							<div class="flex text-lg">
-								<div>{envelope.name}</div>
-								<div class="flex-auto" />
+							<div class="flex text-lg items-center justify-between">
+								{envelope.name}
 								<div
 									class="
 									rounded-lg px-2 py-1

@@ -2,7 +2,7 @@ import { writable } from 'svelte/store'
 
 export interface ToastParams {
 	message: string
-	type?: 'success'
+	type?: 'success' | 'error' | 'info'
 	timeout?: number
 }
 
@@ -20,7 +20,7 @@ export const toast = async (params: ToastParams) => {
 		})
 	const toast: Toast = {
 		message: params.message,
-		type: params.type || 'info',
+		type: params.type || 'success',
 		timeout: params.timeout || 3000,
 		close: close
 	}

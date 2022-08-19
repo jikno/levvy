@@ -1962,7 +1962,7 @@ sirv-cli@^2.0.0:
     sirv "^2.0.0"
     tinydate "^1.0.0"
 
-sirv@^2.0.0:
+sirv@^2.0.0, sirv@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/sirv/-/sirv-2.0.2.tgz#128b9a628d77568139cff85703ad5497c46a4760"
   integrity sha512-4Qog6aE29nIjAOKe/wowFTxOdmbEZKb+3tsLljaBRzJwtqto0BChD2zzH0LhgCSXiI+V7X+Y45v14wBZQ1TK3w==
