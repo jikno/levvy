@@ -13,7 +13,7 @@
 	in:scale={{ delay: 100, start: 0.8, easing: elasticOut }}
 >
 	{params.message}
-	<button class="rounded-full text-{params.type}-content hover:text-base-100 opacity-100" on:click={params.close}>
+	<button class="rounded-full text-{params.type}-content opacity-50 hover:opacity-75" on:click={params.close}>
 		<Icon icon="x-circle" size={20} />
 	</button>
 </div>

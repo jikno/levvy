@@ -5,7 +5,7 @@
     "scripts": {
         "build": "rollup -c",
         "dev": "rollup -c -w",
-        "start": "sudo  sirv public --no-clear --port 5000 --host",
+        "start": "sudo  sirv public --no-clear --port 8000 --host",
         "check": "svelte-check --tsconfig ./tsconfig.json",
         "mobile": "yarn build && cap sync",
         "ios": "yarn mobile && cap open ios",

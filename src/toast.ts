@@ -25,7 +25,7 @@ export const toast = async (params: ToastParams) => {
 		close: close
 	}
 
-	currentToasts.update(toasts => [...toasts, toast])
+	currentToasts.update(toasts => [toast, ...toasts])
 
 	await setTimeout(() => close, toast.timeout)
 }

@@ -133,12 +133,13 @@
 		{/if}
 	{/if}
 
+	<div class="stack toast-container">
+		{#each $currentToasts as params}
+			<Toast {params} />
+		{/each}
+	</div>
 	<SettingsModal bind:isOpen={settingsModalIsOpen} {onLogout} showJSON={() => (editJson = true)} />
 	<NewTransactionModal bind:isOpen={newTransactionModalIsOpen} />
-
-	{#each $currentToasts as params}
-		<Toast {params} />
-	{/each}
 </div>
 
 <style>
