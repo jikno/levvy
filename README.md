@@ -1,13 +1,3 @@
-# Private Finance
+# Levvy
 
-A personal finance app for me (and maybe others) to use.
-
-## Contributing?
-
-Sure thing!
-
-```sh
-# clone repo
-yarn
-yarn dev
-```
+> A rewrite as a [Jikno App](https://vehmloewff.gitbook.io/jikno-apps/)
