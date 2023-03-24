@@ -1,3 +1,3 @@
 # Levvy
 
-> A rewrite as a [Jikno App](https://vehmloewff.gitbook.io/jikno-apps/)
+> A rewrite as a pure typescript application
